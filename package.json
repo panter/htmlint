@@ -1,0 +1,22 @@
+{
+  "name": "hinter",
+  "version": "0.0.1",
+  "description": "H(TMLl)inter - Lints HTML templates",
+  "engines" : { "node" : ">=10.0" },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.panter.ch:scf/hinter.git"
+  },
+  "author": "Falko Schmidt <scf@panter.ch>",
+  "license": "ISC",
+  "dependencies": {
+    "parse5": "^5.0.0"
+  },
+  "devDependencies": {
+    "jasmine": "^3.1.0"
+  }
+}
