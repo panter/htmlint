@@ -15,5 +15,9 @@ module.exports = () => {
 
   fs.createReadStream(path).pipe(parser.get()).on('end', () => {
     parser.onEnd();
+
+    parser.issues.forEach((issue) => {
+      console.log(issue.print());
+    });
   });
 };

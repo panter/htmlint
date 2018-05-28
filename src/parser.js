@@ -31,9 +31,6 @@ module.exports = class Parser {
     if (this.stack.length > 0) {
       this.issues.push('unclosed_tag', this.stack[this.stack.length - 1].tag);
     }
-    this.issues.forEach((issue) => {
-      console.log(issue.print());
-    });
   }
 
   get () {
