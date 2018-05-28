@@ -1,4 +1,5 @@
-const parse5 = require('parse5');
+const SAXParser = require('parse5-sax-parser');
+const parser = new SAXParser({ sourceCodeLocationInfo: true });
 const fs     = require('fs');
 
 module.exports = () => {
@@ -11,12 +12,25 @@ module.exports = () => {
     process.exit(1);
   }
 
-  fs.readFile(path, (err, data) => {
-    if (err) {
-      throw err;
+  const stack = [];
+
+  parser.on('startTag', function (tag) {
+    if (!tag.selfClosing) {
+      stack.push(tag.tagName);
     }
-    debugger;
-    const documentFragment = parse5.parseFragment(String(data));
-    console.log(documentFragment.childNodes[0].tagName);
+  });
+
+  parser.on('endTag', function (tag) {
+    const index = stack.lastIndexOf(tag.tagName);
+    if (index > -1) {
+      stack.splice(index, 1);
+    }
+  });
+
+  const readFile = fs.createReadStream(path);
+  readFile.pipe(parser).on('end', () => {
+    if (stack.length > 0) {
+      console.log(`Found unclosed tags at ${ stack[stack.length - 1] }`);
+    }
   });
 };

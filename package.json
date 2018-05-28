@@ -16,7 +16,7 @@
   "author": "Falko Schmidt <scf@panter.ch>",
   "license": "ISC",
   "dependencies": {
-    "parse5": "^5.0.0"
+    "parse5-sax-parser": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
