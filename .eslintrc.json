@@ -1,0 +1,152 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jasmine": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "sourceType": "script"
+  },
+  "rules": {
+    "no-restricted-globals": [ "error", "fdescribe", "fit" ],
+    "no-restricted-properties": [2, {
+            "object": "browser",
+            "property": "explore",
+            "message": "Please delete browser.explore from your test"
+        },{
+            "object": "browser",
+            "property": "debug",
+            "message": "Please delete browser.debug from your test"
+        },{
+            "object": "browser",
+            "property": "pause",
+            "message": "Please delete browser.pause from your test"
+        },{
+            "object": "browser",
+            "property": "enterRepl",
+            "message": "Please delete browser.enterRepl from your test"
+        }],
+    "array-bracket-spacing": [
+      "error",
+      "always",
+      {
+        "objectsInArrays": false,
+        "arraysInArrays" : false
+      }
+    ],
+    "brace-style"  : "error",
+    "comma-dangle" : "error",
+    "comma-spacing": "error",
+    "computed-property-spacing": "error",
+    "curly"        : "error",
+    "dot-notation" : "error",
+    "dot-location" : ["error", "property"],
+    "eqeqeq"       : "error",
+    "func-style"   : ["error", "expression"],
+    "indent"       : [
+      "error",
+      2,
+      {
+        "VariableDeclarator": 0,
+        "SwitchCase"        : 1,
+        "ObjectExpression"  : 1,
+        "ArrayExpression"   : 1,
+        "MemberExpression"  : "off",
+        "FunctionExpression": {
+          "parameters": "first",
+          "body"      : 1
+        },
+        "FunctionDeclaration": {
+          "parameters": "first",
+          "body"      : 1
+        },
+        "CallExpression": {
+          "arguments": "first"
+        }
+      }
+    ],
+    "key-spacing"             : [
+      "error",
+      {
+        "align": "colon"
+      }
+    ],
+    "keyword-spacing"         : "error",
+    "linebreak-style"         : ["error", "unix"],
+    "max-len"                 : [
+      "error",
+      {
+        "code"      : 165,
+        "comments"  : 80,
+        "ignoreUrls": true
+      }
+    ],
+    "new-parens"              : "error",
+    "no-alert"                : "error",
+    "no-caller"               : "error",
+    "no-console"              : "off",
+    "no-constant-condition"   : "error",
+    "no-cond-assign"          : "error",
+    "no-dupe-class-members"   : "error",
+    "no-else-return"          : "error",
+    "no-empty"                : [
+      "error",
+      { "allowEmptyCatch": true }
+    ],
+    "no-eval"                 : "error",
+    "no-labels"               : "error",
+    "no-lone-blocks"          : "error",
+    "no-mixed-spaces-and-tabs": "error",
+    "no-multiple-empty-lines" : "error",
+    "no-native-reassign"      : "error",
+    "no-return-assign"        : "error",
+    "no-trailing-spaces"      : "error",
+    "no-unreachable"          : "error",
+    "no-undef"                : "error",
+    "no-unused-expressions"   : "error",
+    "no-unused-vars"          : "error",
+    "no-use-before-define"    : "error",
+    "no-useless-computed-key" : "error",
+    "object-curly-spacing"    : [
+      "error",
+      "always",
+      {
+        "objectsInObjects": false,
+        "arraysInObjects": false
+      }
+    ],
+    "object-property-newline" : [
+      "error",
+      { "allowMultiplePropertiesPerLine": true }
+    ],
+    "one-var"                 : [
+      "error",
+      {
+        "initialized": "never",
+        "uninitialized": "always"
+      }
+    ],
+    "one-var-declaration-per-line": "error",
+    "operator-linebreak"      : ["error", "after"],
+    "quote-props"             : ["error", "as-needed"],
+    "quotes": [
+        "error",
+        "single",
+        { "allowTemplateLiterals": true,
+          "avoidEscape": true }
+    ],
+    "semi"               : ["error", "always"],
+    "semi-spacing"       : "error",
+    "space-before-blocks": "error",
+    "space-before-function-paren": "error",
+    "space-infix-ops"    : "error",
+    "space-unary-ops"    : "error",
+    "spaced-comment"     : "error",
+    "wrap-iife"          : [
+      "error",
+      "inside",
+      { "functionPrototypeMethods": true }
+    ]
+  }
+}
