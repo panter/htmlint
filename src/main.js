@@ -13,9 +13,7 @@ module.exports = () => {
 
   const parser = new Parser();
 
-  fs.createReadStream(path).pipe(parser.get()).on('end', () => {
-    parser.onEnd();
-
+  parser.parse(fs.createReadStream(path)).on('end', () => {
     parser.issues.forEach((issue) => {
       console.log(issue.print());
     });

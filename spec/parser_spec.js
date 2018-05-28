@@ -8,7 +8,9 @@ describe('Parser', () => {
   describe('with valid HTML', () => {
 
     beforeEach(function (done) {
-      this.stringStream.parse(this.instance, '<a><b></b></a>', done);
+      this.instance.parse('<a><b></b></a>').on('end', () => {
+        done();
+      });
     });
 
     it('has no issues', function () {
@@ -19,7 +21,9 @@ describe('Parser', () => {
   describe('with invalid HTML', () => {
 
     beforeEach(function (done) {
-      this.stringStream.parse(this.instance, '<a><b></a>', done);
+      this.instance.parse('<a><b></a>').on('end', () => {
+        done();
+      });
     });
 
     it('finds two issues', function () {
