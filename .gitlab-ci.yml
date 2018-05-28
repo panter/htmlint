@@ -14,7 +14,7 @@ stages:
 Setup:
   stage: Setup
   script:
-    - npm $NPM_FLAGS install
+    - npm install
 
 
 # ---------------------
