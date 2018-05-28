@@ -1,0 +1,32 @@
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - Setup
+  - Checks
+
+
+# ---------------------
+# Setup stage jobs
+# ---------------------
+
+Setup:
+  stage: Setup
+  script:
+    - npm $NPM_FLAGS install
+
+
+# ---------------------
+# Checks stage jobs
+# ---------------------
+
+Linting:
+  stage: Checks
+  script:
+    - npm run eslint --silent
+
+Unit Tests:
+  stage: Checks
+  script:
+    - npm test
