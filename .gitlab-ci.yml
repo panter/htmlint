@@ -5,30 +5,16 @@ cache:
     - node_modules/
 
 stages:
-  - Setup
   - Checks
-
-
-# ---------------------
-# Setup stage jobs
-# ---------------------
-
-Setup:
-  stage: Setup
-  script:
-    - npm install
 
 
 # ---------------------
 # Checks stage jobs
 # ---------------------
 
-Linting:
+Tests:
   stage: Checks
   script:
+    - npm install
     - npm run eslint --silent
-
-Unit Tests:
-  stage: Checks
-  script:
     - npm test
