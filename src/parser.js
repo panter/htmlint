@@ -13,10 +13,12 @@ module.exports = class Parser {
     this.saxParser = new SaxParser({ sourceCodeLocationInfo: true });
 
     this.saxParser.on('startTag', (tag) => {
-      const nextNode = new HtmlNode(tag, this.currentNode);
-      this.stack.push(nextNode);
-      this.currentNode.children.push(nextNode);
-      this.currentNode = nextNode;
+      if (!tag.selfClosing) {
+        const nextNode = new HtmlNode(tag, this.currentNode);
+        this.stack.push(nextNode);
+        this.currentNode.children.push(nextNode);
+        this.currentNode = nextNode;
+      }
     });
 
     this.saxParser.on('endTag', (tag) => {

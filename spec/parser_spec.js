@@ -56,11 +56,24 @@ describe('Parser', () => {
       });
     });
 
-    it('finds two issues', function () {
+    it('finds three issues', function () {
       expect(this.instance.issues.length).toBe(3);
       expect(this.instance.issues[0].type).toEqual('mismatch_close_tag');
       expect(this.instance.issues[1].type).toEqual('mismatch_close_tag');
       expect(this.instance.issues[2].type).toEqual('unclosed_tag');
+    });
+  });
+
+  describe('with self closing tags', () => {
+
+    beforeEach(function (done) {
+      this.instance.parse('<a><b /></a>').on('end', () => {
+        done();
+      });
+    });
+
+    it('has no issues', function () {
+      expect(this.instance.issues.length).toBe(0);
     });
   });
 });
