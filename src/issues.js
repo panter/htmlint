@@ -1,6 +1,7 @@
 const TYPES = {
   mismatch_close_tag: 'Closing tag mismatch',
-  unclosed_tag      : 'Unclosed element'
+  unclosed_tag      : 'Unclosed element',
+  void_close_tag    : 'Closing tag for void element'
 };
 
 const Issue = class Issue {
@@ -13,7 +14,7 @@ const Issue = class Issue {
     return `${
       TYPES[this.type] } for <${ this.tag.tagName }> detected at line ${
       this.tag.sourceCodeLocation.startLine }, column ${
-      this.tag.sourceCodeLocation.startCol }`;
+      this.tag.sourceCodeLocation.startCol }.`;
   }
 };
 

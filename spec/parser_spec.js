@@ -76,4 +76,47 @@ describe('Parser', () => {
       expect(this.instance.issues.length).toBe(0);
     });
   });
+
+  describe('with void tags', () => {
+
+    describe('that have a closing tags', () => {
+
+      beforeEach(function (done) {
+        this.instance.parse('<input></input>').on('end', () => {
+          done();
+        });
+      });
+
+      it('finds one issue', function () {
+        expect(this.instance.issues.length).toBe(1);
+        expect(this.instance.issues[0].type).toEqual('void_close_tag');
+      });
+    });
+
+    describe('that are self closing', () => {
+
+      beforeEach(function (done) {
+        this.instance.parse('<input />').on('end', () => {
+          done();
+        });
+      });
+
+      it('has no issues', function () {
+        expect(this.instance.issues.length).toBe(0);
+      });
+    });
+
+    describe('that are not self closing', () => {
+
+      beforeEach(function (done) {
+        this.instance.parse('<input>').on('end', () => {
+          done();
+        });
+      });
+
+      it('has no issues', function () {
+        expect(this.instance.issues.length).toBe(0);
+      });
+    });
+  });
 });
