@@ -1,7 +1,7 @@
 {
-  "name": "hinter",
+  "name": "htmlint",
   "version": "0.0.1",
-  "description": "H(TMLl)inter - Lints HTML templates",
+  "description": "HTML(l)int - Lints HTML templates",
   "engines": {
     "node": ">=10.0"
   },
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@git.panter.ch:scf/hinter.git"
+    "url": "git@github.com:panter/htmlint.git"
   },
   "author": "Falko Schmidt <scf@panter.ch>",
   "license": "ISC",

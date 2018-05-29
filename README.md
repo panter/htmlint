@@ -1,4 +1,4 @@
-# hinter
+# htmlint
 Lints HTML snippets.
 
 ## Features
