@@ -22,9 +22,31 @@ module.exports = class Parser {
       return voids.includes(tag.tagName);
     };
 
+    const lintIndendation = (currentTag, parentTag, offset = 0) => {
+      const expected = (this.stack.length - offset) * 2;
+      const found    = currentTag.sourceCodeLocation.startCol - 1;
+
+      if (offset && isVoid(currentTag)) {
+        parentTag = this.currentNode.children[0].tag;
+      }
+
+      const currentLine  = currentTag.sourceCodeLocation.startLine;
+      let   previousLine = 0;
+      if (parentTag.sourceCodeLocation) {
+        previousLine = parentTag.sourceCodeLocation.startLine;
+      }
+
+      if (found !== expected && currentLine > previousLine) {
+        this.issues.push('indentation', currentTag, found, expected);
+      }
+    };
+
     this.saxParser.on('startTag', (tag) => {
       const nextNode = new HtmlNode(tag, this.currentNode);
       this.currentNode.children.push(nextNode);
+
+      lintIndendation(tag, this.currentNode.tag);
+
       if (tag.selfClosing || isVoid(tag)) {
         return;
       }
@@ -34,6 +56,7 @@ module.exports = class Parser {
 
     this.saxParser.on('endTag', (tag) => {
       if (this.currentNode) {
+        lintIndendation(tag, this.currentNode.tag, 1);
         this.currentNode = this.currentNode.parent;
       }
       if (this.stack.length <= 0 || this.stack[this.stack.length - 1].tag.tagName !== tag.tagName) {

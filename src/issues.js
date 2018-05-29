@@ -1,20 +1,28 @@
 const TYPES = {
   mismatch_close_tag: 'Closing tag mismatch',
   unclosed_tag      : 'Unclosed element',
-  void_close_tag    : 'Closing tag for void element'
+  void_close_tag    : 'Closing tag for void element',
+  indentation       : 'Wrong indentation'
 };
 
 const Issue = class Issue {
-  constructor (type, tag) {
-    this.type = type;
-    this.tag  = tag;
+  constructor (type, tag, found, expected) {
+    this.type     = type;
+    this.tag      = tag;
+    this.found    = found;
+    this.expected = expected;
   }
 
   print () {
-    return `${
-      TYPES[this.type] } for <${ this.tag.tagName }> detected at line ${
+    const codeLocation = `line ${
       this.tag.sourceCodeLocation.startLine }, column ${
-      this.tag.sourceCodeLocation.startCol }.`;
+      this.tag.sourceCodeLocation.startCol }`;
+
+    if (this.expected !== undefined) {
+      return `${ TYPES[this.type] }, expected ${ this.expected } but found ${ this.found } at ${
+        codeLocation }.`;
+    }
+    return `${ TYPES[this.type] } for <${ this.tag.tagName }> detected at ${ codeLocation }.`;
   }
 };
 
@@ -23,7 +31,7 @@ module.exports = class Issues extends Array {
     super();
   }
 
-  push (type, tag) {
-    return super.push(new Issue(type, tag));
+  push (type, tag, found, expected) {
+    return super.push(new Issue(type, tag, found, expected));
   }
 };

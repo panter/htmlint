@@ -79,7 +79,7 @@ describe('Parser', () => {
 
   describe('with void tags', () => {
 
-    describe('that have a closing tags', () => {
+    describe('that have a closing tag', () => {
 
       beforeEach(function (done) {
         this.instance.parse('<input></input>').on('end', () => {
@@ -116,6 +116,70 @@ describe('Parser', () => {
 
       it('has no issues', function () {
         expect(this.instance.issues.length).toBe(0);
+      });
+    });
+  });
+
+  describe('formatting', () => {
+
+    describe('with proper formatting', () => {
+
+      beforeEach(function (done) {
+        this.instance.parse('<a>\n  <b>Foo</b>\n</a>').on('end', () => {
+          done();
+        });
+      });
+
+      it('has no issues', function () {
+        expect(this.instance.issues.length).toBe(0);
+      });
+    });
+
+    describe('with improper formatting', () => {
+
+      beforeEach(function (done) {
+        this.instance.parse('<a>\n<b></b>\n</a>').on('end', () => {
+          done();
+        });
+      });
+
+      it('finds one issue', function () {
+        expect(this.instance.issues.length).toBe(1);
+        expect(this.instance.issues[0].type).toEqual('indentation');
+        expect(this.instance.issues[0].found).toBe(0);
+        expect(this.instance.issues[0].expected).toBe(2);
+      });
+    });
+
+    describe('with improper formatting of the closing tag', () => {
+
+      beforeEach(function (done) {
+        this.instance.parse('<a>\n  <b>\n    <input>\n</b>\n</a>').on('end', () => {
+          done();
+        });
+      });
+
+      it('finds one issue', function () {
+        expect(this.instance.issues.length).toBe(1);
+        expect(this.instance.issues[0].type).toEqual('indentation');
+        expect(this.instance.issues[0].found).toBe(0);
+        expect(this.instance.issues[0].expected).toBe(2);
+      });
+    });
+
+    describe('with improper formatting of the starting tag', () => {
+
+      beforeEach(function (done) {
+        this.instance.parse('  <a>\n</a>').on('end', () => {
+          done();
+        });
+      });
+
+      it('finds one issue', function () {
+        expect(this.instance.issues.length).toBe(1);
+        expect(this.instance.issues[0].type).toEqual('indentation');
+        expect(this.instance.issues[0].found).toBe(2);
+        expect(this.instance.issues[0].expected).toBe(0);
       });
     });
   });
