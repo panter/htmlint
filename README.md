@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/panter/htmlint.svg?branch=master)](https://travis-ci.org/panter/htmlint)
+
 # htmlint
 Lints HTML snippets.
 
