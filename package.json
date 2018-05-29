@@ -1,11 +1,14 @@
 {
   "name": "htmlint",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "HTML(l)int - Lints HTML templates",
   "engines": {
     "node": ">=10.0"
   },
   "main": "index.js",
+  "bin": {
+    "htmlint": "./cli.js"
+  },
   "scripts": {
     "test": "node node_modules/jasmine/bin/jasmine",
     "eslint": "eslint src/** spec/**",

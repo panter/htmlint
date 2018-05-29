@@ -1,7 +1,25 @@
-#!/usr/bin/env node
+const fs     = require('fs');
+const Parser = require('./src/parser');
 
-'use strict';
+module.exports = {
 
-const main = require('./src/main');
+  checkFile: (path) => {
+    const parser = new Parser();
 
-main();
+    return new Promise((resolve) => {
+      parser.parse(fs.createReadStream(path)).on('end', () => {
+        resolve(parser.issues);
+      });
+    });
+  },
+
+  checkString: (string) => {
+    const parser = new Parser();
+
+    return new Promise((resolve) => {
+      parser.parse(string).on('end', () => {
+        resolve(parser.issues);
+      });
+    });
+  }
+};
