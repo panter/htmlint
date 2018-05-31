@@ -13,7 +13,7 @@ describe('Parser', () => {
       });
     });
 
-    it('has no issues', function () {
+    it('reports no issues', function () {
       expect(this.instance.issues.length).toBe(0);
     });
   });
@@ -26,7 +26,7 @@ describe('Parser', () => {
       });
     });
 
-    it('finds two issues', function () {
+    it('reports two issues', function () {
       expect(this.instance.issues.length).toBe(2);
       expect(this.instance.issues[0].type).toEqual('mismatch_close_tag');
       expect(this.instance.issues[1].type).toEqual('unclosed_tag');
@@ -41,7 +41,7 @@ describe('Parser', () => {
       });
     });
 
-    it('finds two issues', function () {
+    it('reports two issues', function () {
       expect(this.instance.issues.length).toBe(2);
       expect(this.instance.issues[0].type).toEqual('mismatch_close_tag');
       expect(this.instance.issues[1].type).toEqual('unclosed_tag');
@@ -56,7 +56,7 @@ describe('Parser', () => {
       });
     });
 
-    it('finds three issues', function () {
+    it('reports three issues', function () {
       expect(this.instance.issues.length).toBe(3);
       expect(this.instance.issues[0].type).toEqual('mismatch_close_tag');
       expect(this.instance.issues[1].type).toEqual('mismatch_close_tag');
@@ -72,7 +72,7 @@ describe('Parser', () => {
       });
     });
 
-    it('has no issues', function () {
+    it('reports no issues', function () {
       expect(this.instance.issues.length).toBe(0);
     });
   });
@@ -87,7 +87,7 @@ describe('Parser', () => {
         });
       });
 
-      it('finds one issue', function () {
+      it('reports one issue', function () {
         expect(this.instance.issues.length).toBe(1);
         expect(this.instance.issues[0].type).toEqual('void_close_tag');
       });
@@ -101,7 +101,7 @@ describe('Parser', () => {
         });
       });
 
-      it('has no issues', function () {
+      it('reports no issues', function () {
         expect(this.instance.issues.length).toBe(0);
       });
     });
@@ -114,13 +114,27 @@ describe('Parser', () => {
         });
       });
 
-      it('has no issues', function () {
+      it('reports no issues', function () {
         expect(this.instance.issues.length).toBe(0);
       });
     });
   });
 
   describe('formatting', () => {
+
+    describe('with the ignore-formatting option', () => {
+
+      beforeEach(function (done) {
+        this.instance = new this.module({ ignoreFormatting: true });
+        this.instance.parse('<a>\n<b></b>\n</a>').on('end', () => {
+          done();
+        });
+      });
+
+      it('reports no issues', function () {
+        expect(this.instance.issues.length).toBe(0);
+      });
+    });
 
     describe('with proper formatting', () => {
 
@@ -130,7 +144,7 @@ describe('Parser', () => {
         });
       });
 
-      it('has no issues', function () {
+      it('reports no issues', function () {
         expect(this.instance.issues.length).toBe(0);
       });
     });
@@ -143,7 +157,7 @@ describe('Parser', () => {
         });
       });
 
-      it('finds one issue', function () {
+      it('reports one issue', function () {
         expect(this.instance.issues.length).toBe(1);
         expect(this.instance.issues[0].type).toEqual('indentation');
         expect(this.instance.issues[0].found).toBe(0);
@@ -159,7 +173,7 @@ describe('Parser', () => {
         });
       });
 
-      it('finds one issue', function () {
+      it('reports one issue', function () {
         expect(this.instance.issues.length).toBe(1);
         expect(this.instance.issues[0].type).toEqual('indentation');
         expect(this.instance.issues[0].found).toBe(0);
@@ -175,7 +189,7 @@ describe('Parser', () => {
         });
       });
 
-      it('finds one issue', function () {
+      it('reports one issue', function () {
         expect(this.instance.issues.length).toBe(1);
         expect(this.instance.issues[0].type).toEqual('indentation');
         expect(this.instance.issues[0].found).toBe(2);

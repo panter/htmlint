@@ -11,7 +11,8 @@ const voids = [
 ];
 
 const defaults = {
-  indentation: 2
+  indentation     : 2,
+  ignoreFormatting: false
 };
 
 module.exports = class Parser {
@@ -29,6 +30,10 @@ module.exports = class Parser {
     };
 
     const lintIndendation = (currentTag, parentTag, offset = 0) => {
+      if (config.ignoreFormatting) {
+        return;
+      }
+
       const expected = (this.stack.length - offset) * config.indentation;
       const found    = currentTag.sourceCodeLocation.startCol - 1;
 
