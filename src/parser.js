@@ -10,8 +10,14 @@ const voids = [
   'param', 'source', 'track', 'wbr'
 ];
 
+const defaults = {
+  indentation: 2
+};
+
 module.exports = class Parser {
-  constructor () {
+  constructor (config) {
+    config = Object.assign(defaults, config);
+
     this.stack = [];
     this.issues = new Issues();
     this.currentNode = new HtmlNode('root');
@@ -23,7 +29,7 @@ module.exports = class Parser {
     };
 
     const lintIndendation = (currentTag, parentTag, offset = 0) => {
-      const expected = (this.stack.length - offset) * 2;
+      const expected = (this.stack.length - offset) * config.indentation;
       const found    = currentTag.sourceCodeLocation.startCol - 1;
 
       if (offset && isVoid(currentTag)) {
