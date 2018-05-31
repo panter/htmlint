@@ -1,6 +1,7 @@
 describe('Parser', () => {
 
   beforeEach(function () {
+    delete require.cache[require.resolve('../src/parser')];
     this.module = require('../src/parser');
     this.instance = new this.module();
   });
@@ -122,20 +123,6 @@ describe('Parser', () => {
 
   describe('formatting', () => {
 
-    describe('with the ignore-formatting option', () => {
-
-      beforeEach(function (done) {
-        this.instance = new this.module({ ignoreFormatting: true });
-        this.instance.parse('<a>\n<b></b>\n</a>').on('end', () => {
-          done();
-        });
-      });
-
-      it('reports no issues', function () {
-        expect(this.instance.issues.length).toBe(0);
-      });
-    });
-
     describe('with proper formatting', () => {
 
       beforeEach(function (done) {
@@ -194,6 +181,20 @@ describe('Parser', () => {
         expect(this.instance.issues[0].type).toEqual('indentation');
         expect(this.instance.issues[0].found).toBe(2);
         expect(this.instance.issues[0].expected).toBe(0);
+      });
+    });
+
+    describe('with the ignore-formatting option', () => {
+
+      beforeEach(function (done) {
+        this.instance = new this.module({ ignoreFormatting: true });
+        this.instance.parse('<a>\n<b></b>\n</a>').on('end', () => {
+          done();
+        });
+      });
+
+      it('reports no issues', function () {
+        expect(this.instance.issues.length).toBe(0);
       });
     });
   });
