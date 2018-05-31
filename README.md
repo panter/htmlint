@@ -45,6 +45,10 @@ htmlint.checkString('path/to/some.html').then((issues) => {
 });
 ```
 
+## VIM integration
+
+See [ALE fork](https://github.com/kaethorn/ale). 
+
 ## Planned Features
-- [ ] Formatting checks and rules.
-- [ ] VIM integration (e.g. via ALE).
+- Configurable checks and rules.
+- Autoformat according to formatting rules.
