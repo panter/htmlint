@@ -1,6 +1,6 @@
 {
   "name": "htmlint",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "HTML(l)int - Lints HTML templates",
   "engines": {
     "node": ">=10.0"
