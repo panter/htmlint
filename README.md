@@ -3,6 +3,8 @@
 # htmlint
 Lints HTML snippets.
 
+![linting example](demo.gif?raw=true)
+
 ## Features
 - Detects inconsistent tag structure.
 
