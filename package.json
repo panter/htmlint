@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "node node_modules/jasmine/bin/jasmine",
-    "eslint": "eslint src/** spec/**",
+    "eslint": "eslint src/** spec/** *.js",
     "test:watch": "chokidar 'spec/**/*_spec.js' -c 'npm test --silent'"
   },
   "repository": {
@@ -21,6 +21,7 @@
   "author": "Falko Schmidt <scf@panter.ch>",
   "license": "ISC",
   "dependencies": {
+    "commander": "^2.15.1",
     "parse5-sax-parser": "^5.0.0"
   },
   "devDependencies": {
