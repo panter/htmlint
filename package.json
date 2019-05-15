@@ -22,7 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^2.15.1",
-    "parse5-sax-parser": "^5.0.0"
+    "parse5-sax-parser": "5.0.0"
   },
   "devDependencies": {
     "chokidar": "^2.0.3",
