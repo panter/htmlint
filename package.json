@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "chokidar": "^2.0.3",
-    "chokidar-cli": "^1.2.0",
-    "eslint": "^4.19.1",
+    "chokidar-cli": "^1.2.2",
+    "eslint": "^5.16.0",
     "jasmine": "^3.1.0"
   }
 }
