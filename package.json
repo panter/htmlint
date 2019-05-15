@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "node node_modules/jasmine/bin/jasmine",
-    "eslint": "eslint src/** spec/** *.js",
+    "eslint": "eslint --ext .js src/ spec/ ./",
     "test:watch": "chokidar 'spec/**/*_spec.js' -c 'npm test --silent'"
   },
   "repository": {
